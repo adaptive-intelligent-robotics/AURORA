@@ -1,0 +1,79 @@
+Bootstrap: localimage
+From: aurora-base.sif
+
+%labels Author lg4615@ic.ac.uk
+	# adapted from Antoine Cully
+    Version v0.0.1
+
+%post
+   export LD_LIBRARY_PATH="/workspace/lib:$LD_LIBRARY_PATH"
+   cd /git/sferes2/exp/
+
+    # Cloning repository
+    #CLONEHERE
+
+    # Use setup.sh and fix_build.py from REPOSITORY
+   cp /git/sferes2/exp/aurora/singularity/resources/setup.sh /git/sferes2/
+   cp /git/sferes2/exp/aurora/singularity/resources/fix_build.py /git/sferes2/
+
+   cd /git/sferes2/
+   ./setup.sh -j 4 $SETUP_ARGS
+
+    cd /git/sferes2/exp/aurora
+    python3 -m singularity.hpc_config --path-folder-json /git/sferes2/exp/aurora/
+
+%runscript
+    bash -c 'sleep $[ ( $RANDOM % 90 )  + 1 ]s'
+
+    export HOME=/tmp/home
+    mkdir $HOME
+    D=$(/opt/TurboVNC/bin/vncserver 2>&1 | grep "Desktop" | awk '{print $3}' | sed 's/.*://g')
+    export DISPLAY=':'$D
+
+    CURPATH=$(pwd)
+    cd /git/sferes2/
+    DIRNAME=results_$1
+    PATHNAME=$(date +%Y-%m-%d_%H_%M_%S)_$$
+
+    mkdir -p $CURPATH/$DIRNAME/
+    if [ ! -z "${PBS_ARRAY_INDEX}" ]
+     then
+      tmp_dir=$CURPATH/$DIRNAME/$DIRNAME.${PBS_ARRAY_INDEX}
+      mkdir -p $tmp_dir
+      echo PBS_ARRAY_INDEX is defined, using the following results folder: $tmp_dir
+    else
+      PATHNAME=$(date +%Y-%m-%d_%H_%M_%S)_$$
+      tmp_dir=$(mktemp -d -p $CURPATH/$DIRNAME/ $DIRNAME.XXX)
+      echo PBS_ARRAY_INDEX not defined, using the following results folder: $tmp_dir
+    fi
+
+    executable_name=$1
+    shift
+
+    PATH_LAST_GEN_FILE="$(python3 get_last_gen_file.py -p $tmp_dir)"
+    if [ ! -z "${PATH_LAST_GEN_FILE}" ]
+    then
+     echo Resuming: Launching command \'build/exp/aurora/$executable_name -d $tmp_dir -r $PATH_LAST_GEN_FILE "$@"\'
+     build/exp/aurora/$executable_name -d $tmp_dir -r $PATH_LAST_GEN_FILE "$@"
+    else
+     echo First Launch: Launching command \'build/exp/aurora/$executable_name -d $tmp_dir "$@"\'
+     build/exp/aurora/$executable_name -d $tmp_dir "$@"
+    fi
+
+
+%apprun gen_job_scripts
+    python3 /git/sferes2/exp/aurora/submodules/gitlab_notebook/gen_job_script.py "$1"
+    python3 /git/sferes2/exp/aurora/experiment_serialiser.py --chosen "$2" --container "$3"
+
+%apprun analysis
+    number_processes="${2:-30}"
+    python3 /git/sferes2/exp/aurora/analysis/analysis_runner.py --data "$1" --number-processes "${number_processes}"
+    CURPATH=$(pwd)
+    echo "Runscript Analysis at "$CURPATH
+    cd /git/sferes2/exp/aurora/
+    git log --decorate --oneline --graph master -n 30 > $CURPATH/git_log.txt
+
+    python3 ./submodules/gitlab_notebook/gen_report.py $CURPATH $CURPATH
+
+%apprun generate_results_paper
+    python3 /git/sferes2/exp/aurora/analysis/paper/generate_all_results_paper.py --folder-save-results "$1"

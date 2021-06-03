@@ -1,0 +1,12 @@
+[submodule "submodules/figure_generator"]
+	path = submodules/figure_generator
+	url = ../figure-generator.git
+[submodule "submodules/singularity_scripts"]
+	path = submodules/singularity_scripts
+	url = ../../../AIRL_tools/singularity_scripts
+[submodule "submodules/gitlab_notebook"]
+	path = submodules/gitlab_notebook
+	url = ../../../AIRL_tools/gitlab_notebook
+[submodule "submodules/remote_builder"]
+	path = submodules/remote_builder
+	url = ../../../AIRL_tools/remote_builder

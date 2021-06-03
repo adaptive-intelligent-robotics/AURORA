@@ -1,0 +1,120 @@
+Bootstrap: localimage
+From: airl_env_pytorch_d9e929da.sif
+
+%labels Author lg4615@ic.ac.uk
+	# adapted from Antoine Cully
+    Version v0.0.1
+
+%files
+    ./resources/setup.sh /git/sferes2
+    ./resources/fix_build.py /git/sferes2
+    ./resources/get_last_gen_file.py /git/sferes2
+
+%post
+    export LD_LIBRARY_PATH="/workspace/lib:$LD_LIBRARY_PATH"
+    cd /git/sferes2
+
+    # Install Useful libraries
+    apt-get update
+    apt-get upgrade -y # REMOVED because installs cuda-10.2 and gives linker issues
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get install -y  python3-matplotlib python3-numpy python3-dev python3-opencv python3-pip python3-tk graphviz xdg-utils
+    apt-get install -y ffmpeg  # For saving videos with robot_dart
+
+    # Update sferes2
+    cd /git/sferes2
+    if [ ! -z "${CI_JOB_TOKEN}" ] # this enables the automated build in the CI environment
+    then
+      git remote add resume-upstream https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.doc.ic.ac.uk/AIRL/research_projects/manon_flageat/sferes2_resume.git
+
+    elif [ ! -z "${PERSONAL_TOKEN}" ]
+    then
+      git remote add resume-upstream https://oauth:${PERSONAL_TOKEN}@gitlab.doc.ic.ac.uk/AIRL/research_projects/manon_flageat/sferes2_resume.git
+    else
+      git remote add resume-upstream https://gitlab.doc.ic.ac.uk/AIRL/research_projects/manon_flageat/sferes2_resume.git
+    fi
+
+    git fetch resume-upstream
+    git merge resume-upstream/develop  # from develop branch
+
+    # Install Box2d
+   cd /git
+   git clone https://github.com/erincatto/box2d.git ./box2d
+   cd ./box2d
+   git checkout 8815e0963d2c042309ab302fadcea47034f352cb
+   sed -i 's/STATIC/SHARED'/g ./src/CMakeLists.txt
+   # little hack to have ball bouncing against walls
+   sed -i 's/#define b2_velocityThreshold\t\t1.0f/#define b2_velocityThreshold\t\t0.0f/' ./include/box2d/b2_settings.h
+   mkdir build
+   cd build
+   cmake -DBOX2D_BUILD_UNIT_TESTS=OFF -DBOX2D_BUILD_TESTBED=OFF -DCMAKE_INSTALL_PREFIX:PATH=/workspace ../
+   cmake --build .
+   mv src/libbox2d.so /workspace/lib/
+   cp -r ../include/box2d /workspace/include
+   
+   # Installing robox2d
+   cd /git
+
+   if [ ! -z "${CI_JOB_TOKEN}" ] # this enables the automated build in the CI environment
+    then
+      git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.doc.ic.ac.uk/AIRL/airl_tools/robox2d.git ./robox2d
+    elif [ ! -z "${PERSONAL_TOKEN}" ]
+    then
+      git clone https://oauth:${PERSONAL_TOKEN}@gitlab.doc.ic.ac.uk/AIRL/airl_tools/robox2d.git ./robox2d
+    else
+      git clone https://gitlab.doc.ic.ac.uk/AIRL/airl_tools/robox2d.git ./robox2d
+    fi
+
+   cd ./robox2d
+   git checkout adapt-api-as-robot-dart  # in adapt-api-as-robot-dart
+   ./waf configure --prefix /workspace --shared --magnum_install_dir  /workspace  --magnum_integration_install_dir /workspace --magnum_plugins_install_dir /workspace --corrade_install_dir /workspace
+   ./waf
+   ./waf install
+
+
+    # Install nn2 from original Repository, and libfastsim from custom repo
+    apt-get install -y libsdl1.2-dev # First install SDL1.2 for libfastsim
+
+    cd /git/sferes2/modules/
+
+     git clone --branch QD_nn https://github.com/sferes2/nn2.git nn2/
+
+    if [ ! -z "${CI_JOB_TOKEN}" ] # this enables the automated build in the CI environment
+     then
+          git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.doc.ic.ac.uk/AIRL/research_projects/luca_grillotti/libfastsim.git libfastsim/
+     elif [ ! -z "${PERSONAL_TOKEN}" ]
+     then
+          git clone https://oauth:${PERSONAL_TOKEN}@gitlab.doc.ic.ac.uk/AIRL/research_projects/luca_grillotti/libfastsim.git libfastsim/
+     else
+          git clone https://gitlab.doc.ic.ac.uk/AIRL/research_projects/luca_grillotti/libfastsim.git libfastsim/
+     fi
+
+     # Install FastSim Library in /workspace/ directory
+     cd /git/sferes2/modules/libfastsim
+     ./waf configure --prefix=/workspace
+     ./waf build
+     ./waf install
+
+    # Add library names to configuration file of spheres
+    cd /git/sferes2/
+    echo 'libfastsim' >> modules.conf
+    echo 'nn2' >> modules.conf
+
+    apt-get install -y  gdb
+
+    # alias pip="/usr/local/anaconda/bin/pip"
+    pip3 install Cython
+    pip3 install numpy matplotlib plotly scipy
+    pip3 install opencv-python==4.1.2.30
+    pip3 install seaborn pandas python-gitlab graphviz imageio natsort tabulate
+
+    pip3 install Jinja2
+    pip3 install sklearn  # For using k-means in Maze positions to select which behaviours to show in report
+    pip3 install imageio  # for creating GIFs
+    pip3 install tabulate  # for converting pandas df to markdown
+
+   cd /git/sferes2/exp/
+   mkdir aurora/
+
+%help
+    To Complete

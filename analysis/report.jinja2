@@ -1,0 +1,939 @@
+
+<details>
+<summary> Git Log Information </summary>
+
+```text
+/IMPORT/git_log.txt
+```
+
+</details>
+
+----------------------------------------------------------------------------------------------------
+
+<details>
+<summary> Walls Analysis </summary>
+
+{% for graph in list_metric_graphs_walls %}
+
+<details>
+<summary> {{ graph.title }} </summary>
+
+{% if graph.error_traceback is not none %}
+```
+{{ graph.error_traceback }}
+```
+{% endif %}
+
+<details>
+<summary> Size Archive </summary>
+![Size Archive]({{ graph.path_size_pop }})
+</details>
+
+<details>
+<summary> Position </summary>
+![Position]({{ graph.path_pos }})
+</details>
+
+<details>
+<summary> Rotation </summary>
+![Rotation]({{ graph.path_rot }})
+</details>
+
+<details>
+<summary> Ground Truth </summary>
+![Ground Truth]({{ graph.path_gt }})
+</details>
+
+<details>
+<summary> Mutual Information between Position and Rotation </summary>
+![Mutual Information between Position and Rotation]({{ graph.path_mutual_information }})
+</details>
+
+<details>
+<summary> l </summary>
+![l]({{ graph.path_l }})
+</details>
+    
+</details>
+
+{% endfor %}
+
+</details>
+
+-------------------------------------------------------------------------
+
+<details>
+<summary> Hexapod Camera Vertical Analysis </summary>
+
+{% for graph in list_metric_graphs_hexapod_camera_vertical %}
+
+<details>
+<summary> {{ graph.title }} </summary>
+
+{% if graph.error_traceback is not none %}
+```
+{{ graph.error_traceback }}
+```
+{% endif %}
+
+<details>
+<summary> Size Archive </summary>
+<img src="{{ graph.path_size_pop }}"  width="600">
+</details>
+
+<details>
+<summary> Position </summary>
+<img src="{{ graph.path_pos }}"  width="600">
+</details>
+
+<details>
+<summary> Fitness Scores </summary>
+<img src="{{ graph.path_mean_fitness }}"  width="300">
+<img src="{{ graph.path_max_fitness }}"  width="300">
+</details>
+
+<details>
+<summary> Mean Novelty </summary>
+<img src="{{ graph.path_novelty }}"  width="600">
+</details>
+
+<details>
+<summary> L </summary>
+<img src="{{ graph.path_l }}"  width="600">
+</details>
+
+<details>
+<summary> Entropy Normalised </summary>
+<img src="{{ graph.path_entropy }}"  width="600">
+</details>
+
+<details>
+<summary> JDS distance with uniform across EXPLORED space </summary>
+<img src="{{ graph.path_jds_explored }}"  width="600">
+</details>
+
+<details>
+<summary> JDS distance with uniform across ENTIRE space </summary>
+<img src="{{ graph.path_jds_entire }}"  width="600">
+</details>
+
+</details>
+
+{% endfor %}
+
+</details>
+
+---------------------------------------------------------------------------------------------------
+
+<details>
+<summary> Maze Analysis </summary>
+
+{% for graph in list_metric_graphs_maze %}
+
+<details>
+<summary> {{ graph.title }} </summary>
+
+{% if graph.error_traceback is not none %}
+```
+{{ graph.error_traceback }}
+```
+{% endif %}
+
+<details>
+<summary> Size Archive </summary>
+<img src="{{ graph.path_size_pop }}"  width="600">
+</details>
+
+<details>
+<summary> Position </summary>
+<img src="{{ graph.path_pos }}"  width="600">
+</details>
+
+<details>
+<summary> Fitness Scores </summary>
+<img src="{{ graph.path_mean_fitness }}"  width="300">
+<img src="{{ graph.path_max_fitness }}"  width="300">
+</details>
+
+<details>
+<summary> Mean Novelty </summary>
+<img src="{{ graph.path_novelty }}"  width="600">
+</details>
+
+<details>
+<summary> l </summary>
+<img src="{{ graph.path_l }}"  width="600">
+</details>
+
+<details>
+<summary> Entropy Normalised </summary>
+<img src="{{ graph.path_entropy }}"  width="600">
+</details>
+
+<details>
+<summary> JDS distance with uniform across EXPLORED space </summary>
+<img src="{{ graph.path_jds_explored }}"  width="600">
+</details>
+
+<details>
+<summary> JDS distance with uniform across ENTIRE space </summary>
+<img src="{{ graph.path_jds_entire }}"  width="600">
+</details>
+    
+</details>
+
+{% endfor %}
+
+</details>
+
+-----------------------------------------------------------------------------
+
+<details>
+<summary> Air Hockey Analysis </summary>
+
+{% for graph in list_metric_graphs_air_hockey %}
+
+<details>
+<summary> {{ graph.title }} </summary>
+
+{% if graph.error_traceback is not none %}
+```
+{{ graph.error_traceback }}
+```
+{% endif %}
+
+<details>
+<summary> Size Archive </summary>
+<img src="{{ graph.path_size_pop }}"  width="600">
+</details>
+
+<details>
+<summary> Position </summary>
+<img src="{{ graph.path_pos }}"  width="600">
+</details>
+
+<details>
+<summary> Fitness Scores </summary>
+<img src="{{ graph.path_mean_fitness }}"  width="300">
+<img src="{{ graph.path_max_fitness }}"  width="300">
+</details>
+
+<details>
+<summary> Mean Novelty </summary>
+<img src="{{ graph.path_novelty }}"  width="600">
+</details>
+
+<details>
+<summary> l </summary>
+<img src="{{ graph.path_l }}"  width="600">
+</details>
+
+<details>
+<summary> Entropy Normalised </summary>
+<img src="{{ graph.path_entropy }}"  width="600">
+</details>
+
+<details>
+<summary> JDS distance with uniform across EXPLORED space </summary>
+<img src="{{ graph.path_jds_explored }}"  width="600">
+</details>
+
+<details>
+<summary> JDS distance with uniform across ENTIRE space </summary>
+<img src="{{ graph.path_jds_entire }}"  width="600">
+</details>
+    
+</details>
+
+{% endfor %}
+
+</details>
+
+---------------------------------------------------------------------------------------
+
+----------
+
+<details>
+<summary> Show Table Summary Experiments Launched </summary>
+
+{{ table_summary }}
+
+</details>
+
+----------
+
+
+{% for variant in list_variants_walls %}
+
+<details>
+<summary> {{ variant.name }} - {{ variant.hash }} </summary>
+
+{{ variant.table_info }}
+
+{% if variant.error_traceback is not none %}
+```
+{{ variant.error_traceback }}
+```
+{% endif %}
+
+<details>
+<summary> {{ variant.name }} </summary>
+
+### 3D Position Coloring
+
+<details>
+<summary> Visualise Final Positions of Individuals (x, y, z) | Color Indexing -> Position </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+        {% for gen in info_subdir.list_gen %}
+
+#### Generation {{ gen }}
+
+[3D archive Positions (Color indexing -> Position) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/gt-pos_color-pos_gen_{{ gen }}.html)
+
+        {% endfor %}
+</details>
+    
+    {% endif %}
+{% endfor %}
+</details>
+
+<details>
+<summary> Visualise Final Rotations of Individuals (pitch, roll, yaw) | Color Indexing -> Position </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen %}
+        
+#### Generation {{ gen }}
+
+[3D archive Rotations (Color indexing -> Position) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/gt-rot_color-pos_gen_{{ gen }}.html)
+
+        {% endfor %}
+
+</details>
+    {% endif %}
+{% endfor %}
+
+</details>
+
+### 3D Rotation Coloring
+
+<details>
+<summary> Visualise Final Rotations of Individuals (pitch, roll, yaw) | Color Indexing -> Rotation </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen %}
+            
+#### Generation {{ gen }}
+
+[3D archive Rotations (Color indexing -> Rotation) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/gt-rot_color-rot_gen_{{ gen }}.html)
+
+        {% endfor %}
+</details>
+
+    {% endif %}
+{% endfor %}
+</details>
+
+<details>
+<summary> Visualise Final Positions of Individuals (x, y, z) | Color Indexing -> Rotation </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen %}
+                
+#### Generation {{ gen }}
+
+[3D archive Position (Color indexing -> Rotation) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/gt-pos_color-rot_gen_{{ gen }}.html)
+
+        {% endfor %}
+</details>
+
+    {% endif %}
+{% endfor %}
+</details>
+
+### Mosaics
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen_mosaic %}
+
+#### Generation {{ gen }}
+
+<details>
+<summary> Generation {{ gen }}  </summary>
+![Mosaic - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/mosaic_gen_{{ gen }}.png)
+![Mosaic - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/obs_mosaic_gen_{{ gen }}.png)
+![Mosaic - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/reconst_mosaic_gen_{{ gen }}.png)
+
+</details>
+
+        {% endfor %}
+
+</details>
+    {% endif %}
+{% endfor %}
+
+</details>
+
+### Metrics
+
+<details>
+<summary> Show Metrics </summary>
+
+#### Size Archive
+<details>
+<summary> Show Metric </summary>
+![Size Archive]({{ variant.graph.path_size_pop }})
+</details>
+
+#### Position
+<details>
+<summary> Show Metric </summary>
+![Position]({{ variant.graph.path_pos }})
+</details>
+
+#### Rotation
+<details>
+<summary> Show Metric </summary>
+![Rotation]({{ variant.graph.path_rot }})
+</details>
+
+#### Ground Truth
+<details>
+<summary> Show Metric </summary>
+![Ground Truth]({{ variant.graph.path_gt }})
+</details>
+
+#### Mutual Information between Position and Rotation
+<details>
+<summary> Show Metric </summary>
+![Mutual Information between Position and Rotation]({{ variant.graph.path_mutual_information }})
+</details>
+
+#### L
+<details>
+<summary> Show Metric </summary>
+![l]({{ variant.graph.path_l }})
+</details>
+ 
+</details>
+
+</details>
+
+{% endfor %}
+
+-----------------------------------------------------------------------------------------------------
+
+{% for variant in list_variants_hexapod_camera_vertical %}
+
+<details>
+<summary> {{ variant.name }} - {{ variant.hash }} </summary>
+
+{{ variant.table_info }}
+
+{% if variant.error_traceback is not none %}
+```
+{{ variant.error_traceback }}
+```
+{% endif %}
+
+<details>
+<summary> {{ variant.name }} </summary>
+
+### 3D Position Coloring
+
+<details>
+<summary> GT - (Color GT) </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+<img src="/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/scatter_pos.gif"  width="300">
+<img src="/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/heatmap_10.gif"  width="300">
+<img src="/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/heatmap_50.gif"  width="300">
+
+        {% for gen in info_subdir.list_gen %}
+
+#### Generation {{ gen }}
+
+[GT (Color GT) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/gt_color_gt_{{ gen }}.html)
+
+        {% endfor %}
+</details>
+    
+    {% endif %}
+{% endfor %}
+</details>
+
+<details>
+<summary> GT - (Color Latent) </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen %}
+        
+#### Generation {{ gen }}
+
+[GT (Color Latent) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/gt_color_latent_{{ gen }}.html)
+
+        {% endfor %}
+
+</details>
+    {% endif %}
+{% endfor %}
+
+</details>
+
+### 3D Rotation Coloring
+
+<details>
+<summary> Latent - (Color Latent) </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen %}
+            
+#### Generation {{ gen }}
+
+[Latent (Color Latent) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/latent_color_latent_{{ gen }}.html)
+
+        {% endfor %}
+</details>
+
+    {% endif %}
+{% endfor %}
+</details>
+
+<details>
+<summary> Latent - (Color GT) </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen %}
+                
+#### Generation {{ gen }}
+
+[Latent (Color GT) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/latent_color_gt_{{ gen }}.html)
+
+        {% endfor %}
+</details>
+
+    {% endif %}
+{% endfor %}
+</details>
+
+### Mosaics
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen_mosaic %}
+
+#### Generation {{ gen }}
+
+<details>
+<summary> Generation {{ gen }}  </summary>
+![Mosaic - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/mosaic_gen_{{ gen }}.png)
+![Mosaic - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/obs_mosaic_gen_{{ gen }}.png)
+![Mosaic - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/reconst_mosaic_gen_{{ gen }}.png)
+
+</details>
+
+        {% endfor %}
+
+</details>
+    {% endif %}
+{% endfor %}
+
+</details>
+
+### Metrics
+
+<details>
+<summary> Show Metrics </summary>
+
+#### Size Archive
+<details>
+<summary> Show Metric </summary>
+![Size Archive]({{ variant.graph.path_size_pop }})
+</details>
+
+#### Position
+<details>
+<summary> Show Metric </summary>
+![Position]({{ variant.graph.path_pos }})
+</details>
+
+#### Mean Novelty
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_novelty }}"  width="600">
+</details>
+
+#### L
+<details>
+<summary> Show Metric </summary>
+![l]({{ variant.graph.path_l }})
+</details>
+
+#### Fitness Scores
+<details>
+<summary> Show Fitness Scores </summary>
+![mean_fitness]({{ variant.graph.path_mean_fitness }})
+![max_fitness]({{ variant.graph.path_max_fitness }})
+</details>
+ 
+</details>
+
+</details>
+
+{% endfor %}
+
+-------------------------------------------------------------------------------------------
+
+{% for variant in list_variants_maze %}
+
+<details>
+<summary> {{ variant.name }} - {{ variant.hash }} </summary>
+
+{{ variant.table_info }}
+
+{% if variant.error_traceback is not none %}
+```
+{{ variant.error_traceback }}
+```
+{% endif %}
+
+<details>
+<summary> {{ variant.name }} </summary>
+
+### Results Observations and Positions
+
+<details>
+<summary> See Results Observations and Positions </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+<img src="/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/scatter_pos.gif"  width="300">
+<img src="/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/heatmap_10.gif"  width="300">
+<img src="/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/heatmap_50.gif"  width="300">
+
+        {% for gen in info_subdir.list_gen %}
+#### Generation {{ gen }}
+
+[maze_gt_color_gt_{{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/gt_color_gt_{{ gen }}.html)
+[maze_latent_color_gt_{{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/latent_color_gt_{{ gen }}.html)
+[maze_gt_color_latent_{{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/gt_color_latent_{{ gen }}.html)
+[maze_latent_color_latent_{{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/latent_color_latent_{{ gen }}.html)
+
+<details>
+<summary> Show Reconstruction Sequences </summary>
+![reconstruction_sequence_{{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/sequence_{{ gen }}_*.png)
+</details>
+        
+        {% endfor %}
+        
+</details>
+
+    {% endif %}
+{% endfor %}
+
+</details>
+</details>
+
+### Metrics
+
+<details>
+<summary> Show Metrics </summary>
+
+#### Size Archive
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_size_pop }}"  width="600">
+</details>
+
+#### Position
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_pos }}"  width="600">
+</details>
+
+#### Fitness Scores
+<details>
+<summary> Show Fitness Scores </summary>
+<img src="{{ variant.graph.path_mean_fitness }}"  width="300">
+<img src="{{ variant.graph.path_max_fitness }}"  width="300">
+</details>
+
+#### L
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_l }}"  width="600">
+</details>
+
+#### Mean Novelty
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_novelty }}"  width="600">
+</details>
+
+#### Entropy Normalised
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_entropy }}"  width="600">
+</details>
+
+#### JDS distance with uniform across EXPLORED space
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_jds_explored }}"  width="600">
+</details>
+
+#### JDS distance with uniform across ENTIRE space
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_jds_entire }}"  width="600">
+</details>
+ 
+</details>
+
+</details>
+
+{% endfor %}
+
+------------------------------------------------------------------------------------
+
+{% for variant in list_variants_air_hockey %}
+
+<details>
+<summary> {{ variant.name }} - {{ variant.hash }} </summary>
+
+{{ variant.table_info }}
+
+{% if variant.error_traceback is not none %}
+```
+{{ variant.error_traceback }}
+```
+{% endif %}
+
+<details>
+<summary> {{ variant.name }} </summary>
+
+### 3D Position Coloring
+
+<details>
+<summary> GT - (Color GT) </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+<img src="/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/scatter_pos.gif"  width="300">
+<img src="/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/heatmap_10.gif"  width="300">
+<img src="/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/heatmap_50.gif"  width="300">
+
+        {% for gen in info_subdir.list_gen %}
+
+#### Generation {{ gen }}
+
+[GT (Color GT) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/gt_color_gt_{{ gen }}.html)
+
+        {% endfor %}
+</details>
+    
+    {% endif %}
+{% endfor %}
+</details>
+
+<details>
+<summary> GT - (Color Latent) </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen %}
+        
+#### Generation {{ gen }}
+
+[GT (Color Latent) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/gt_color_latent_{{ gen }}.html)
+
+        {% endfor %}
+
+</details>
+    {% endif %}
+{% endfor %}
+
+</details>
+
+### 3D Rotation Coloring
+
+<details>
+<summary> Latent - (Color Latent) </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen %}
+            
+#### Generation {{ gen }}
+
+[Latent (Color Latent) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/latent_color_latent_{{ gen }}.html)
+
+        {% endfor %}
+</details>
+
+    {% endif %}
+{% endfor %}
+</details>
+
+<details>
+<summary> Latent - (Color GT) </summary>
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen %}
+                
+#### Generation {{ gen }}
+
+[Latent (Color GT) - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/latent_color_gt_{{ gen }}.html)
+
+        {% endfor %}
+</details>
+
+    {% endif %}
+{% endfor %}
+</details>
+
+### Mosaics
+
+{% for info_subdir in variant.list_info_subdirs %}
+    {% if loop.index <= 3 %}
+<details>
+<summary> {{ info_subdir.subdir }} </summary>
+
+        {% for gen in info_subdir.list_gen_mosaic %}
+
+#### Generation {{ gen }}
+
+<details>
+<summary> Generation {{ gen }}  </summary>
+![Mosaic - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/mosaic_gen_{{ gen }}.png)
+![Mosaic - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/obs_mosaic_gen_{{ gen }}.png)
+![Mosaic - {{ gen }}](/UPLOAD/results/{{ variant.name_exec }}/{{ info_subdir.subdir }}/reconst_mosaic_gen_{{ gen }}.png)
+
+</details>
+
+        {% endfor %}
+
+</details>
+    {% endif %}
+{% endfor %}
+
+</details>
+
+### Metrics
+
+<details>
+<summary> Show Metrics </summary>
+
+#### Size Archive
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_size_pop }}"  width="600">
+</details>
+
+#### Position
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_pos }}"  width="600">
+</details>
+
+#### Fitness Scores
+<details>
+<summary> Show Fitness Scores </summary>
+<img src="{{ variant.graph.path_mean_fitness }}"  width="300">
+<img src="{{ variant.graph.path_max_fitness }}"  width="300">
+</details>
+
+#### Mean Novelty
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_novelty }}"  width="600">
+</details>
+
+#### L
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_l }}"  width="600">
+</details>
+
+#### Entropy Normalised
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_entropy }}"  width="600">
+</details>
+
+#### JDS distance with uniform across EXPLORED space
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_jds_explored }}"  width="600">
+</details>
+
+#### JDS distance with uniform across ENTIRE space
+<details>
+<summary> Show Metric </summary>
+<img src="{{ variant.graph.path_jds_entire }}"  width="600">
+</details>
+ 
+</details>
+
+</details>
+
+{% endfor %}

@@ -1,0 +1,17 @@
+include:
+    - project: 'AIRL/AIRL_tools/gitlab_notebook'
+      ref: master
+      file: 'gitlab-ci-template.yml'
+
+pages:
+  stage: .pre
+  script:
+  - mkdir .public
+  - cp -r docs .public/
+  - mv .public public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
+
