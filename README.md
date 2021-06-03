@@ -27,7 +27,7 @@ More precisely, AURORA alternates between:
 
 ## Requirements
 
-All the dependencies (with pre-built experiments) are already installed in the [following singularity container]().
+All the dependencies (with pre-built experiments) are already installed in the [following singularity container](https://drive.google.com/drive/folders/1H32OLp4rsUv3d_dc01ftkDww3uDX8rpz?usp=sharing).
 
 In particular, the following C++ libraries are installed in that container:
 
@@ -56,7 +56,7 @@ pip3 install -r requirements.txt
 
 ### Experiment class
 
-Each experiment is described via an [Experiment object](../singularity/experiment.py).
+Each experiment is described via an [Experiment object](./singularity/experiment.py).
 
 Its main attributes are:
 - `algo` Name of the algorithm to consider.
