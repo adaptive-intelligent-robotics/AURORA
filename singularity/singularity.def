@@ -10,7 +10,7 @@ From: aurora-base.sif
    cd /git/sferes2/exp/
 
     # Cloning repository
-    #CLONEHERE
+   git clone https://github.com/adaptive-intelligent-robotics/AURORA aurora/
 
     # Use setup.sh and fix_build.py from REPOSITORY
    cp /git/sferes2/exp/aurora/singularity/resources/setup.sh /git/sferes2/

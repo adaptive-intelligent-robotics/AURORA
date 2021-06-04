@@ -55,15 +55,7 @@ From: airl_env_pytorch_d9e929da.sif
    # Installing robox2d
    cd /git
 
-   if [ ! -z "${CI_JOB_TOKEN}" ] # this enables the automated build in the CI environment
-    then
-      git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.doc.ic.ac.uk/AIRL/airl_tools/robox2d.git ./robox2d
-    elif [ ! -z "${PERSONAL_TOKEN}" ]
-    then
-      git clone https://oauth:${PERSONAL_TOKEN}@gitlab.doc.ic.ac.uk/AIRL/airl_tools/robox2d.git ./robox2d
-    else
-      git clone https://gitlab.doc.ic.ac.uk/AIRL/airl_tools/robox2d.git ./robox2d
-    fi
+    git clone https://github.com/adaptive-intelligent-robotics/RoBox2D ./robox2d
 
    cd ./robox2d
    git checkout adapt-api-as-robot-dart  # in adapt-api-as-robot-dart
@@ -79,15 +71,7 @@ From: airl_env_pytorch_d9e929da.sif
 
      git clone --branch QD_nn https://github.com/sferes2/nn2.git nn2/
 
-    if [ ! -z "${CI_JOB_TOKEN}" ] # this enables the automated build in the CI environment
-     then
-          git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.doc.ic.ac.uk/AIRL/research_projects/luca_grillotti/libfastsim.git libfastsim/
-     elif [ ! -z "${PERSONAL_TOKEN}" ]
-     then
-          git clone https://oauth:${PERSONAL_TOKEN}@gitlab.doc.ic.ac.uk/AIRL/research_projects/luca_grillotti/libfastsim.git libfastsim/
-     else
-          git clone https://gitlab.doc.ic.ac.uk/AIRL/research_projects/luca_grillotti/libfastsim.git libfastsim/
-     fi
+     git clone https://github.com/Lookatator/libfastsim libfastsim/
 
      # Install FastSim Library in /workspace/ directory
      cd /git/sferes2/modules/libfastsim
