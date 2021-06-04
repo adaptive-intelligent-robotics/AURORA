@@ -46,6 +46,8 @@ In particular, the following C++ libraries are installed in that container:
   - [Box2D](https://github.com/erincatto/box2d) - 2D physics engine.
   - [RoBox2D](https://github.com/adaptive-intelligent-robotics/RoBox2D) - A wrapper around Box2D, following the same structure as RobotDART.
 
+_Note:_ the last installation steps of the container are successively performed by the [singularity-base.def](./singularity/singularity-base.def) and the [singularity.def](./singularity/singularity.def) files.
+
 The analysis is performed in Python 3.8, all the libraries used are in the [requirements.txt](requirements.txt) file.
 They can be installed via the following command (if launched from outside of the container):
 ```bash
