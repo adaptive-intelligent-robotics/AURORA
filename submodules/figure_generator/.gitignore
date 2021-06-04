@@ -1,0 +1,10 @@
+venv/
+.DS_Store
+.idea/
+__pycache__/
+images/
+results/
+
+*.png
+*.jpg
+*.html
