@@ -1,6 +1,6 @@
 # Unsupervised Behaviour Discovery with Quality-Diversity Optimisation
 
-This repository presents the official implementation of [Unsupervised Behaviour Discovery with Quality-Diversity Optimisation](https://arxiv.org/abs/2030.12345).
+This repository presents the official implementation of [Unsupervised Behaviour Discovery with Quality-Diversity Optimisation](https://arxiv.org/abs/2106.05648).
 In particular, this repository contains the implementation of the introduced algorithm: _AUtonomous RObots Realising their Abilities (AURORA)_.
 
 The purpose of AURORA is to learn a container of diverse and high-performing behaviours, while automatically learning how to define relevant Behavioural Descriptors (BDs).
