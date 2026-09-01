@@ -1,5 +1,8 @@
 # Unsupervised Behaviour Discovery with Quality-Diversity Optimisation
 
+> **⚠️ This repository is archived and no longer maintained.**
+> A more recent and faster implementation of AURORA is now available in [QDax](https://github.com/adaptive-intelligent-robotics/qdax).
+
 This repository presents the official implementation of [Unsupervised Behaviour Discovery with Quality-Diversity Optimisation](https://arxiv.org/abs/2106.05648).
 In particular, this repository contains the implementation of the introduced algorithm: _AUtonomous RObots Realising their Abilities (AURORA)_.
 
@@ -27,7 +30,7 @@ More precisely, AURORA alternates between:
 
 ## Requirements
 
-All the dependencies (with pre-built experiments) are already installed in the [following singularity container](https://drive.google.com/drive/folders/1H32OLp4rsUv3d_dc01ftkDww3uDX8rpz?usp=sharing).
+All the dependencies (with pre-built experiments) are installed in a singularity container, built from the definitions in the [`singularity/`](./singularity/) folder.
 
 In particular, the following C++ libraries are installed in that container:
 
@@ -132,11 +135,6 @@ This creates a folder `results/` inside your analysis folder, which contains:
   - html files presenting the BDs of the archive at some specific generations
 - other folders with diverse comparisons between several variants. 
   The details of those comparisons are provided in [the configuration analysis file](analysis/configuration_analysis.py).
-
-### Obtained analysis plots
-
-The main analysis plots obtained from the above command are available [here](https://drive.google.com/drive/folders/1LLVgItOE2p1zeTGnXS2kcrNxrZcA0Ugj?usp=sharing).
-Those plots are made to perform some raw analysis of the results for each run of each experiment.
 
 ## Main Results
 
